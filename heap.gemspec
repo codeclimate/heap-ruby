@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-$LOAD_PATH.unshift File.expand_path('lib', __dir__)
-require 'heap'
+require_relative 'lib/heap/version'
 
 Gem::Specification.new do |s|
   s.name = "heap"
@@ -11,7 +10,7 @@ Gem::Specification.new do |s|
   s.date = "2016-04-07"
   s.description = "Implements Heap's server-side API"
   s.email = "victor@heapanalytics.com"
-  
+
   s.homepage = "http://github.com/heap/heap-ruby"
   s.licenses = ["MIT"]
   s.required_rubygems_version = ">= 1.3.6"
@@ -27,7 +26,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'faraday', '~> 1.9'
   s.add_runtime_dependency 'faraday_middleware', '~> 1.2'
-  
+
   s.add_development_dependency 'rake', '>= 0.8.7'
   s.add_development_dependency 'bundler', '>= 1.0'
 end
