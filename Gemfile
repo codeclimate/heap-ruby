@@ -9,6 +9,6 @@ group :development do
 end
 
 group :test do
+  gem 'coveralls', '~> 0.8'
   gem 'minitest', '>= 5.8.4'
-  gem 'simplecov', '>= 0.11.2'
 end
