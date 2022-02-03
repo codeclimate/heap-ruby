@@ -47,7 +47,7 @@ class HeapAPI::Client
   #
   # @param [Hash<String, String|Number>] properties key-value property bag;
   #   each key must have fewer than 1024 characters; each value must be a
-  #   Number or String with fewer than 1024 characters
+  #   Boolean, Number, or String with fewer than 1024 characters
   # @raise ArgumentError if the property bag is invalid
   # @return [HeapAPI::Client] self
   def ensure_valid_properties!(properties)
@@ -60,16 +60,15 @@ class HeapAPI::Client
         raise ArgumentError, "Property name #{key} too long; " +
             "#{key.to_s.length} is above the 1024-character limit"
       end
-      if value.kind_of? Numeric
+      if value.kind_of?(Numeric)
         # TODO(pwnall): Check numerical limits, if necessary.
       elsif value.kind_of?(String) || value.kind_of?(Symbol)
         if value.to_s.length > 1024
           raise ArgumentError, "Property #{key} value #{value.inspect} too " +
               "long; #{value.to_s.length} is above the 1024-character limit"
         end
-      else
-        raise ArgumentError,
-            "Unsupported type for property #{key} value #{value.inspect}"
+      elsif ![TrueClass, FalseClass].include?(value.class) # boolean values are permitted
+        raise ArgumentError, "Unsupported type for property #{key} value #{value.inspect}"
       end
     end
   end

@@ -161,7 +161,7 @@ class ClientTrackTest < MiniTest::Test
         'app_id' => 'test-app-id',
         'identity' => 'test-identity',
         'event' => 'test_track_with_properties',
-        'properties' => { 'foo' => 'bar', 'heap' => 'hurray' }
+        'properties' => { 'foo' => 'bar', 'heap' => 'hurray', 'valid' => true }
       }
       assert_equal 'application/json', env[:request_headers]['Content-Type']
       assert_equal @heap.user_agent, env[:request_headers]['User-Agent']
@@ -171,7 +171,7 @@ class ClientTrackTest < MiniTest::Test
     end
 
     assert_equal @heap, @heap.track('test_track_with_properties',
-        'test-identity','foo' => 'bar', :heap => :hurray)
+        'test-identity','foo' => 'bar', :heap => :hurray, 'valid' => true)
   end
 
   def test_track_error
